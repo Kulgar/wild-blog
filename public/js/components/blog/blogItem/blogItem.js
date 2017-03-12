@@ -13,6 +13,8 @@ let blogItem = {
         'use  strict'
         let initialPost;
 
+        this.user = {bookmarks: []};
+
         // Test if $stateParams.id exists (ex: stateParams.id is 1234567 form this url http://domain.ext/1234567)
         if ($stateParams.id) {
             // If $stateParams.id is _new (when you click on add on blogListMenu button see blogListMenu.html)
@@ -69,26 +71,6 @@ let blogItem = {
                 this.editMode = false
             } else {
                 $state.go('blog.list')
-            }
-        }
-
-        this.isFav = () => {
-            if (!this.post) return
-            return (this.user.bookmarks.find((post) => post._id === this.post._id))
-        }
-
-        this.addOrRemoveToBookmark = () => {
-            // Try to find post in bookmarks
-            let postFound = this.user.bookmarks.find((post) => post._id === this.post._id)
-
-            if (!postFound) {
-                //Not found
-                this.user.bookmarks.push(this.post)
-            } else {
-                //Found
-                this.user.bookmarks = this.user.bookmarks.filter((post) => {
-                    return post._id !== this.post._id
-                })
             }
         }
 

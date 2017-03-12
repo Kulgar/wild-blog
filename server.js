@@ -8,9 +8,12 @@ let favicon         = require('serve-favicon')
 let methodOverride  = require('method-override')
 let logger          = require('morgan')
 
+let routes          = require('./app/routes/posts.js')
+
 let app             = express()
 
-let router          = express.Router()
+const ENV = require('./config/env')[process.env.NODE_ENV || 'development']
+
 
 // Set a static folder used by express. This folder contains our Angular application
 // Take a look at: expressjs.com/en/starter/static-files.html
@@ -42,6 +45,13 @@ app.use(cookieParser())
 
 // Override HTTP methods to support DELETE PUT, if client device doesn't support them
 app.use(methodOverride('X-HTTP-Method-Override'))
+
+//Load all api routes
+app.use('/api', routes())
+
+// Connect to mongodb
+let mongoose = require('mongoose')
+mongoose.connect(ENV.db);
 
 // Catch 404 not found errors and forward to error handler
 app.use((request, response, next) => {

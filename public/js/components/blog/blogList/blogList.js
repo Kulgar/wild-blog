@@ -8,6 +8,8 @@ let blogList = {
         // Define startIndex variable with default value 3
         this.startIndex = 3
 
+        this.user = {}
+
         // Call get() method from PostsService.
         // When this request receive response we affect response data to this controller variable posts
         PostsService.get().then((res) => {
@@ -16,7 +18,7 @@ let blogList = {
             this.posts = [{
                 title: "Hello There", 
                 content: "I am an intersting article. There was an error by the way because API doesn't exist yet"
-            }  ]
+            }]
         })
 
         // Create loadMore function.
