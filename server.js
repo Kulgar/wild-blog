@@ -7,10 +7,15 @@ let cookieParser    = require('cookie-parser')
 let favicon         = require('serve-favicon')
 let methodOverride  = require('method-override')
 let logger          = require('morgan')
+let fs = require('fs')
+let path = require('path')
+
+let routes          = require('./app/routes/posts.js')
 
 let app             = express()
 
-let router          = express.Router()
+const ENV = require('./config/env')[process.env.NODE_ENV || 'development']
+
 
 // Set a static folder used by express. This folder contains our Angular application
 // Take a look at: expressjs.com/en/starter/static-files.html
@@ -18,7 +23,9 @@ console.log(__dirname);
 app.use(express.static(__dirname + '/public'));
 
 // Set logs
-app.use(logger('combined'));
+// create a write stream (in append mode)
+let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
+app.use(logger('dev', {stream: accessLogStream}));
 
 // https://www.npmjs.com/package/serve-favicon
 // Uncomment after placing your favicon in /public:
@@ -43,6 +50,13 @@ app.use(cookieParser())
 // Override HTTP methods to support DELETE PUT, if client device doesn't support them
 app.use(methodOverride('X-HTTP-Method-Override'))
 
+//Load all api routes
+app.use('/api', routes())
+
+// Connect to mongodb
+let mongoose = require('mongoose')
+mongoose.connect(ENV.db);
+
 // Catch 404 not found errors and forward to error handler
 app.use((request, response, next) => {
   let err = new Error('Not Found')
@@ -53,6 +67,7 @@ app.use((request, response, next) => {
 
 // To better understand middlewares: 
 // http://expressjs.com/en/guide/writing-middleware.html
+// And: http://expressjs.com/en/guide/using-middleware.html
 // Middleware to catch all errors
 app.use((error, request, response, next) => {
   console.error(error.stack)
