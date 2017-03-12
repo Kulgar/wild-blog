@@ -2,5 +2,7 @@
 This file is the entry point
 */
 'use strict'
-let message = "Yo everyone!";
-console.log(message);
+let port = process.env.PORT || 8000
+let server = require('./server.js')
+
+
