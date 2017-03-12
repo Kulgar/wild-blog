@@ -4,6 +4,7 @@
   "description": "This is a blog",
   "main": "wild-blog-app.js",
   "scripts": {
+    "start": "node wild-blog-app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
