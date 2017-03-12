@@ -1,0 +1,85 @@
+$primary: #0C8CF6;
+$secondary: #64b5f6;
+$success: #4caf50;
+$error: #ef5350;
+$warning: #ff9800;
+$transparent: rgba(255, 255, 255, 0);
+$white: #FFFFFF;
+$facebook: #3b5998;
+
+.pull-right {
+    float: right;
+}
+
+.btn-fixed-bottom {
+    position: fixed;
+    right: 23px;
+    bottom: 23px;
+}
+
+nav {
+    li {
+        min-width: 200px;
+    }
+
+    .brand-logo {
+        i {
+            font-size: 36px;
+        }
+    }
+}
+
+.fb {
+    background: $facebook;
+}
+
+.waves-effect.waves-fb {
+    background-color: rgba(59, 89, 152, 1);
+}
+/* Override colors */
+.input-field .prefix.active {
+    color: $primary;
+}
+
+input[type=password]:focus:not([readonly])+label,
+input[type=text]:focus:not([readonly])+label,
+input[type=email]:focus:not([readonly])+label,
+textarea.materialize-textarea:focus:not([readonly])+label {
+    color: $primary;
+}
+
+input[type=password]:focus:not([readonly]),
+input[type=text]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid $primary;
+    box-shadow: 0 1px 0 0 $primary;
+}
+
+#toast-container {
+    top: 80%;
+}
+
+.toast-info {
+    background-color: $primary;
+}
+
+.toast-success {
+    background-color: $success;
+}
+
+.toast-warning {
+    background-color: $warning;
+}
+
+.toast-error {
+    background-color: $error;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-floating) {
+    color: $secondary;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-floating):hover {
+    color: $primary;
+}
