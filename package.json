@@ -20,5 +20,13 @@
   "bugs": {
     "url": "https://github.com/Kulgar/wild-blog/issues"
   },
-  "homepage": "https://github.com/Kulgar/wild-blog#readme"
+  "homepage": "https://github.com/Kulgar/wild-blog#readme",
+  "dependencies": {
+    "body-parser": "~1.16.0",
+    "cookie-parser": "~1.4.3",
+    "express": "~4.14.1",
+    "method-override": "~2.3.6",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.2"
+  }
 }
