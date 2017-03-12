@@ -4,8 +4,11 @@
   "description": "This is a blog",
   "main": "wild-blog-app.js",
   "scripts": {
-    "start": "node wild-blog-app",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "webpack -p --progress",
+    "start": "NODE_ENV=production node wild-blog-app",
+    "watch:build": "webpack --watch",
+    "watch:server": "nodemon wild-blog-app --watch \"./app\"",
+    "dev": "npm run watch:server | npm run watch:build"
   },
   "repository": {
     "type": "git",
@@ -22,11 +25,20 @@
   },
   "homepage": "https://github.com/Kulgar/wild-blog#readme",
   "dependencies": {
+    "angular": "^1.6.1",
+    "angular-ui-router": "^0.4.2",
     "body-parser": "~1.16.0",
     "cookie-parser": "~1.4.3",
     "express": "~4.14.1",
     "method-override": "~2.3.6",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.4.0",
+    "babel-preset-env": "^1.2.1",
+    "nodemon": "^1.11.0",
+    "webpack": "^2.2.1"
   }
 }
