@@ -1,0 +1,15 @@
+<div class="fixed-action-btn toolbar" ng-if="$ctrl.user">
+    <a class="btn-floating btn-large blue darken-1">
+        <i class="large material-icons">reorder</i>
+    </a>
+    <ul>
+        <!-- Call onEdit function bound by blogItem -->
+        <li class="waves-effect waves-light" ng-if="!$ctrl.editMode"><a ng-click="$ctrl.onEdit()"><i class="material-icons">mode_edit</i></a></li>
+        <!-- Call onDelete function bound by blogItem -->
+        <li class="waves-effect waves-light" ng-if="!$ctrl.editMode"><a ng-click="$ctrl.onDelete()"><i class="material-icons">delete</i></a></li>
+        <!-- Call onUndo function bound by blogItem -->
+        <li class="waves-effect waves-light" ng-if="$ctrl.editMode"><a ng-click="$ctrl.onUndo()"><i class="material-icons">undo</i></a></li>
+        <!-- Call onSave function bound by blogItem -->
+        <li class="waves-effect waves-light" ng-if="$ctrl.editMode"><a ng-click="$ctrl.onSave()"><i class="material-icons">done</i></a></li>
+    </ul>
+</div>

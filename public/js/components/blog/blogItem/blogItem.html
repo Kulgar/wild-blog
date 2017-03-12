@@ -1,0 +1,35 @@
+<!-- Display blogItemMenu component (see blogItemMenu.js ) and bind properties with all functions  -->
+<blog-item-menu ng-if="$ctrl.editable" user="$ctrl.user" edit-mode="$ctrl.editMode" on-undo="$ctrl.undo()" on-edit="$ctrl.editMode = !$ctrl.editMode" on-delete="$ctrl.delete()" on-save="$ctrl.save()" />
+<div class="col s12 m4">
+    <div class="card">
+        <!-- In general if it's not editable it's when this component is used in the blogList component -->
+        <div class="card-content">
+            <!-- Display post.title if this component is not editable or editable and not in edit mode -->
+            <span class="card-title" ng-if="(!$ctrl.editable || ($ctrl.editable && !$ctrl.editMode))">
+              {{$ctrl.post.title}}
+            </span>
+            <!-- Display input for editing post.title only if editable and in edit mode -->
+            <input type="text" ng-if="($ctrl.editable && $ctrl.editMode)" ng-model="$ctrl.post.title" placeholder="Title">
+            <!-- Display post.content if this component is not editable or editable and not in edit mode -->
+            <div ng-if="(!$ctrl.editable || ($ctrl.editable && !$ctrl.editMode))">
+                {{$ctrl.post.content | limitTo: ($ctrl.editable ? $ctrl.post.content.length : 110)}}
+            </div>
+            <!-- Display textarea for editing post.content only if editable and in edit mode -->
+            <textarea class="materialize-textarea" ng-if="($ctrl.editable && $ctrl.editMode)" ng-model="$ctrl.post.content" placeholder="Content"></textarea>
+        </div>
+        <div class="card-action">
+            <!-- Display this link, only if it's not editable, to change state to blog.item with the post id -->
+            <a ng-if="!$ctrl.editable" ui-sref="blog.item({id: $ctrl.post._id})">Read more</a>
+            <!-- Display this link, only if it's editable and not in edit mode, to change state to app.blog.list (go back) -->
+            <a ng-if="$ctrl.editable && !$ctrl.editMode" ui-sref="blog.list">Close</a>
+            <!-- Display these links, only if it's in edit mode  -->
+            <a ng-if="$ctrl.editMode" ng-click="$ctrl.undo()" class="waves-effect"><i class="material-icons">undo</i></a>
+            <a ng-if="$ctrl.editMode" ng-click="$ctrl.save()" class="waves-effect"><i class="material-icons">done</i></a>
+            <!-- On click add or remove to bookmark this post -->
+            <a href="" ng-click="$ctrl.addOrRemoveToBookmark()" ng-if="$ctrl.user && !$ctrl.post.isNew">
+                <!-- Change icon from post.isFav value -->
+                <i class="material-icons pull-right">{{($ctrl.isFav() ? 'turned_in' : 'turned_in_not')}}</i>
+            </a>
+        </div>
+    </div>
+</div>

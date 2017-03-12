@@ -1,0 +1,25 @@
+<!-- Dropdown Structure -->
+<ul id='demoDropdown' class='dropdown-content'>
+  <li><a class="grey-text text-lighten-2"><i class="material-icons left">reorder</i>Menu</a></li>
+  <li class="divider"></li>
+  <li ng-if="!$ctrl.user"><a ui-sref="app.login.connect" title="Connect" class="blue-text text-darken-1"><i class="material-icons left">perm_identity</i>Connect</a></li>
+  <li ng-if="$ctrl.user"><a href="" ng-click="$ctrl.disconnect()" title="Bookmark" class="blue-text text-darken-1"><i class="material-icons left">turned_in</i>Bookmarked</a></li>
+  <li ng-if="$ctrl.user"><a href="" ng-click="$ctrl.disconnect()" title="Disconnect" class="blue-text text-darken-1"><i class="material-icons left">close</i>Logout</a></li>
+</ul>
+<nav class="blue darken-1">
+    <div class="nav-wrapper container">
+        <a href="#" class="brand-logo"><i class="material-icons">book</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href='javascript:void(0);' data-activates='demoDropdown' dropdown>{{($ctrl.user ? $ctrl.user.name : '')}}<i class="material-icons right">{{($ctrl.user ? 'arrow_drop_down' : 'reorder')}}</i></a></li>
+        </ul>
+         <a href="#" data-activates="mobile-demo" class="button-collapse" data-sidenav="left" data-closeonclick="false"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
+
+<ul id="mobile-demo" class="side-nav">
+  <li><a class="grey-text text-lighten-2"><i class="material-icons left">reorder</i>Menu</a></li>
+  <li class="divider"></li>
+  <li ng-if="!$ctrl.user"><a ui-sref="app.login.connect" title="Connect" class="blue-text text-darken-1"><i class="material-icons left">perm_identity</i>Connect</a></li>
+  <li ng-if="$ctrl.user"><a href="" ng-click="$ctrl.disconnect()" title="Bookmark" class="blue-text text-darken-1"><i class="material-icons left">turned_in</i>Bookmarked</a></li>
+  <li ng-if="$ctrl.user"><a href="" ng-click="$ctrl.disconnect()" title="Disconnect" class="blue-text text-darken-1"><i class="material-icons left">close</i>Logout</a></li>
+</ul>

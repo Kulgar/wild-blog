@@ -1,0 +1,21 @@
+<section>
+    <div class="row">
+        <!-- Display message if there is no post -->
+        <div ng-if="$ctrl.posts.length === 0" class="center">
+            <h5>No posts</h5>
+            <i class="material-icons">sentiment_dissatisfied</i>
+        </div>
+        <!-- Repeat blog-item component for each post limited with startIndex value
+        post="post" it's databinding, we bind post value to post property of blog-item component
+        -->
+        <blog-item ng-repeat="post in $ctrl.posts | limitTo: $ctrl.startIndex" post="post"></blog-item>
+    </div>
+    <div class="row">
+        <div class="col s12 center">
+            <!-- Display button if there is more posts -->
+            <a class="waves-effect btn-flat" ng-click="$ctrl.loadMore()" ng-if="($ctrl.startIndex < $ctrl.posts.length)">Load More</a>
+        </div>
+    </div>
+    <!-- Display add button if user is connected-->
+    <a ng-if="$ctrl.user" class="btn-floating btn-large btn-fixed-bottom waves-effect waves-light blue darken-1 right" ui-sref="blog.item({id: '_new'})" title="Add"><i class="material-icons">add</i></a>
+</section>
