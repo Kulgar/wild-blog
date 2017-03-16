@@ -3,6 +3,8 @@ let mongoose = require('mongoose')
 let crypto   = require('crypto')
 let jwt      = require('jsonwebtoken')
 
+const ENV    = require('../../config/env')[process.env.NODE_ENV || 'development'] 
+
 // What is jwt? 
 // JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties.
 // In other words, it allows applications to authenticate users with specific role, like 'I claim to be an admin!' => JWT Token sent by this user will allow the application to validate this claim or not thanks to its secret key

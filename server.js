@@ -9,7 +9,8 @@ let methodOverride  = require('method-override')
 let logger          = require('morgan')
 let passport        = require('passport')
 
-let routes          = require('./app/routes/posts.js')
+// Will automatically load "index.js" from routes folder
+let routes          = require('./app/routes')
 
 let app             = express()
 
@@ -51,7 +52,7 @@ app.use(methodOverride('X-HTTP-Method-Override'))
 app.use(passport.initialize())
 
 //Load all api routes
-//Pass passport to routes
+//Pass passport to routes module in app/routes/index.js
 app.use('/api', routes(passport))
 
 // Connect to mongodb
