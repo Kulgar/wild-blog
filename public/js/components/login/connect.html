@@ -1,0 +1,30 @@
+<section>
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col m6 s12 offset-m3">
+                    <i class="material-icons prefix">email</i>
+                    <input id="icon_prefix" type="text" ng-model="$ctrl.user.email">
+                    <label for="icon_prefix">Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col m6 s12 offset-m3">
+                    <i class="material-icons prefix">lock</i>
+                    <input id="icon_telephone" type="password" ng-model="$ctrl.user.password">
+                    <label for="icon_telephone">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <a ui-sref="app.login.create" class="col m3 s6 offset-m3">Create an account</a>
+                <a ui-sref="app.login.password" class="col m3 s6 right-align">Lost password ?</a>
+            </div>
+            <div class="row">
+                <a class="blue darken-1 waves-effect waves-light btn col s12 m6 offset-m3" ng-click="$ctrl.connect()">Connect</a>
+            </div>
+            <div class="row">
+                <a href="/api/auth/facebook" class="fb waves-effect waves-fb btn col s12 m6 offset-m3">Facebook</a>
+            </div>
+        </form>
+    </div>
+</section>

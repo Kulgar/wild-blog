@@ -1,0 +1,11 @@
+<section>
+    <div class="row">
+        <div class="col s12 center">
+            <h2>Connection</h2>
+        </div>
+    </div>
+    <ui-view></ui-view>
+    <a ui-sref="app.login.connect" ng-if="($ctrl.state.current.name != 'app.login.connect')" class="btn-floating btn-large btn-fixed-bottom waves-effect waves-light blue darken-1 left">
+        <i class="material-icons">undo</i>
+    </a>
+</section>
