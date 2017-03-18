@@ -6,13 +6,12 @@ let account = {
         angular.extend(this, {
             create() {
                 UsersService.create($ctrl.user).then((res) => {
-                    console.log("Success")
+                    return UsersService.setToken(res.data.token)
                 }).then((user) => {
-                    let toastContent = `Welcome !`
+                    let toastContent = `Welcome ! ${user.name}`
                     Materialize.toast(toastContent, 4000, 'toast-success')
-                    //$state.go('blog.list')
+                    $state.go('blog.list')
                 }).catch((err) => {
-                    console.log(err)
                     let toastContent = `Error : ${err.data} !`
                     Materialize.toast(toastContent, 4000, 'toast-error')
                 })
