@@ -32,6 +32,20 @@ class UsersController extends Controller {
         })
     }
 
+
+    authenticate(req, res, next) {
+        if (req.user) {
+            console.log(req.user)
+            let user = new User(req.user)
+            let token = user.generateJWT()
+
+            res.redirect("/#!/auth/callback/" + token);
+        } else {
+            res.send(401);
+        }
+
+    }
+
 }
 
 module.exports = UsersController

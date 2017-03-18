@@ -9,10 +9,14 @@ export default ['$http', '$cookies', '$window', '$q', class UsersService {
     }
 
     saveToken(token) {
+        console.log("Save token")
+        console.log(token)
         this.$cookies.put('blog-token', token)
     }
 
     getToken() {
+        console.log("plouf")
+        console.log(this.$cookies.getAll())
         return this.$cookies.get('blog-token')
     }
 
@@ -33,6 +37,7 @@ export default ['$http', '$cookies', '$window', '$q', class UsersService {
             this.$http.post('/api/auth', data).then((res) => {
                 let token = res.data.token
                 let payload = token.split('.')[1]
+                this.saveToken(token)
                 payload = this._decodePayload(payload)
                 this.currentUser = payload
                 resolve(this.currentUser)
@@ -61,12 +66,15 @@ export default ['$http', '$cookies', '$window', '$q', class UsersService {
     }
 
     getCurrent() {
+        console.log("Hello")
+        console.log(this.getToken())
         let deferred = this.$q.defer()
         if (!this.getToken()) {
             deferred.reject()
         } else {
             if (!this.currentUser) {
                 let payload = this.getToken().split('.')[1]
+                console.log(payload)
                 payload = this._decodePayload(payload)
                 this.currentUser = payload
                 if (Math.round(new Date().getTime() / 1000) > payload.exp)

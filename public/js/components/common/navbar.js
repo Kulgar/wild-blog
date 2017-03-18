@@ -5,12 +5,14 @@ let navbar = {
         angular.extend(this, {
             $onInit() {
                 UsersService.getCurrent().then((user) => {
+                  console.log("----")
+                  console.log(user)
                     this.user = user
                 }).catch((err) => {
 
                 })
             },
-            disconnect() {
+            disconnect() {  
                 UsersService.disconnect().then(() => {
                     Materialize.toast('Disconnected', 4000, 'toast-warning')
                     this.user = null
