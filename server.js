@@ -8,7 +8,8 @@ let favicon         = require('serve-favicon')
 let methodOverride  = require('method-override')
 let logger          = require('morgan')
 
-let routes          = require('./app/routes/posts.js')
+// Will automatically load index.js in routes folder
+let routes          = require('./app/routes')
 
 let app             = express()
 

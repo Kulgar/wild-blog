@@ -4,12 +4,8 @@ This file define all routes (API RESTFull) for posts
 'use strict'
 // Require controller used to communicate with database
 let PostsController = require('../controllers/PostsController')
-let express = require('express')
 
-
-module.exports = () => {
-    let app = express.Router();
-
+module.exports = (app) => {
     // Create new controller
     let ctrl = new PostsController();
 
@@ -38,10 +34,4 @@ module.exports = () => {
         return ctrl.delete(req, res, next)
     })
 
-    return app
-   
 }
-
-
-
-
