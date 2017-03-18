@@ -31,9 +31,11 @@ export default ['$http', '$cookies', '$window', '$q', class UsersService {
     connect(data) {
         return new Promise((resolve, reject) => {
             this.$http.post('/api/auth', data).then((res) => {
-                this.currentUser = res.data.user
-                saveToken(res.data.token)
-                resolve(res.data.user)
+                let token = res.data.token
+                let payload = token.split('.')[1]
+                payload = this._decodePayload(payload)
+                this.currentUser = payload
+                resolve(this.currentUser)
             }).catch((err) => {
                 reject(err)
             })

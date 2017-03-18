@@ -11,7 +11,7 @@ let Post = require('../models/post')
 class PostsController extends Controller {
 
 
-    constructor(model) {
+    constructor() {
         super(Post)
     }
 

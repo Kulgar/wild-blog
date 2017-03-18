@@ -9,11 +9,17 @@ let blogItem = {
         editable: "<"
     },
     templateUrl: 'js/components/blog/blogItem/blogItem.html',
-    controller: ['PostsService', '$stateParams', '$state', function(PostsService, $stateParams, $state) {
+    controller: ['UsersService', 'PostsService', '$stateParams', '$state', function(UsersService, PostsService, $stateParams, $state) {
         'use  strict'
         let initialPost;
 
-        this.user = {bookmarks: []};
+        // Call getCurrent() method from UsersService.
+        // When this request receive response we affect response data to this controller variable user
+        UsersService.getCurrent().then((user) => {
+            this.user = user
+        }).catch((err) => {
+            console.log(err)
+        })
 
         // Test if $stateParams.id exists (ex: stateParams.id is 1234567 form this url http://domain.ext/1234567)
         if ($stateParams.id) {
@@ -72,6 +78,30 @@ let blogItem = {
             } else {
                 $state.go('blog.list')
             }
+        }
+
+        this.isFav = () => {
+            if (!this.post) return
+            return (this.user.bookmarks.find((post) => post._id === this.post._id))
+        }
+
+        this.addOrRemoveToBookmark = () => {
+            // Try to find post in bookmarks
+            let postFound = this.user.bookmarks.find((post) => post._id === this.post._id)
+
+            if (!postFound) {
+                //Not found
+                this.user.bookmarks.push(this.post)
+            } else {
+                //Found
+                this.user.bookmarks = this.user.bookmarks.filter((post) => {
+                    return post._id !== this.post._id
+                })
+            }
+
+            UsersService.update(this.user).then(() => {
+                Materialize.toast((postFound ? 'Removed' : 'Added'), 2000, (postFound ? 'toast-warning' : 'toast-success'))
+            })
         }
 
     }]

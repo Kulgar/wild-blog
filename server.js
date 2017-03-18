@@ -7,6 +7,7 @@ let cookieParser    = require('cookie-parser')
 let favicon         = require('serve-favicon')
 let methodOverride  = require('method-override')
 let logger          = require('morgan')
+let passport        = require('passport')
 
 // Will automatically load index.js in routes folder
 let routes          = require('./app/routes')
@@ -15,6 +16,7 @@ let app             = express()
 
 const ENV = require('./config/env')[process.env.NODE_ENV || 'development']
 
+require('./config/passport')(passport) // pass passport for configuration
 
 // Set a static folder used by express. This folder contains our Angular application
 // Take a look at: expressjs.com/en/starter/static-files.html
@@ -47,8 +49,12 @@ app.use(cookieParser())
 // Override HTTP methods to support DELETE PUT, if client device doesn't support them
 app.use(methodOverride('X-HTTP-Method-Override'))
 
+// Initialize passport used by express for authentication
+app.use(passport.initialize())
+
 //Load all api routes
-app.use('/api', routes())
+//Pass passport to routes
+app.use('/api', routes(passport))
 
 // Connect to mongodb
 let mongoose = require('mongoose')

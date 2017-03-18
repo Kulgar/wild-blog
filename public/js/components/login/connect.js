@@ -10,7 +10,14 @@ let connect = {
                     Materialize.toast(toastContent, 4000, 'toast-success')
                     $state.go('blog.list')
                 }).catch((err) => {
-                    let toastContent = `Error : ${err.data} !`
+                    console.log(err)
+                    let message;
+                    if(err.data) {
+                        message = err.data.message || err.data
+                    } else {
+                        message = err
+                    }
+                    let toastContent = `Error : ${message} !`
                     Materialize.toast(toastContent, 4000, 'toast-error')
                 })
             }
