@@ -81,27 +81,12 @@ let blogItem = {
         }
 
         this.isFav = () => {
-            if (!this.post) return
-            return (this.user.bookmarks.find((post) => post._id === this.post._id))
+            // TODO
+            return false
         }
 
         this.addOrRemoveToBookmark = () => {
-            // Try to find post in bookmarks
-            let postFound = this.user.bookmarks.find((post) => post._id === this.post._id)
-
-            if (!postFound) {
-                //Not found
-                this.user.bookmarks.push(this.post)
-            } else {
-                //Found
-                this.user.bookmarks = this.user.bookmarks.filter((post) => {
-                    return post._id !== this.post._id
-                })
-            }
-
-            UsersService.update(this.user).then(() => {
-                Materialize.toast((postFound ? 'Removed' : 'Added'), 2000, (postFound ? 'toast-warning' : 'toast-success'))
-            })
+            // TODO
         }
 
     }]

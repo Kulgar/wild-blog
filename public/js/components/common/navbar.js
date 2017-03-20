@@ -12,6 +12,9 @@ let navbar = {
 
                 })
             },
+            bookmarked() {
+                // TODO -> show only bookmarked articles
+            },
             disconnect() {  
                 UsersService.disconnect().then(() => {
                     Materialize.toast('Disconnected', 4000, 'toast-warning')
