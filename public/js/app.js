@@ -18,7 +18,7 @@ import blog from './components/blog/blog.md'
 
 console.log("In app.js")
 console.log(services)
-
+ 
 angular.module('app', [
     angularUIRouter,
     angularCookies,
