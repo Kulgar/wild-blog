@@ -15,6 +15,10 @@ module.exports = (app, authCheck) => {
         return ctrl.find(req, res, next, req.user)
     })
 
+    app.get('/unsafe', (req, res, next) => {
+        return ctrl.unsafe(req, res, next)
+    })
+
     app.get('/users/:id', authCheck, (req, res, next) => {
         console.log("User", req.user)
         return ctrl.findById(req, res, next, req.user)

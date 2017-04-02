@@ -18,7 +18,7 @@ module.exports = (passport) => {
   // used to deserialize user from the request session:
   passport.deserializeUser(function(id, done){
     // Retrieve user from the session
-    USER.findById(id, function(err, user){
+    User.findById(id, function(err, user){
       done(err, user)
     })
   })

