@@ -11,7 +11,6 @@ class UsersController extends Controller {
     }
 
     find(req, res, next, user) {
-      console.log("User", user)
       // Check if user is an admin, if he is, then he can access /api/users info
       if (user && user.isAdmin) {
         super.find(req, res, next)
@@ -21,8 +20,6 @@ class UsersController extends Controller {
     }
 
     findById(req, res, next, user) {
-      console.log(user)
-      console.log(req.params.id)
       // check if accessed user is current user or if current user is an admin
       // Remember, "user" comes from "authCheck" from users routes
       if (user && (user._id === req.params.id || user.isAdmin)) {
@@ -33,7 +30,7 @@ class UsersController extends Controller {
     }
 
     create(req, res, next) {
-        User.findOne({
+        this.model.findOne({
             email: req.body.email
         }, function(err, user) {
             console.log(user)
@@ -50,6 +47,20 @@ class UsersController extends Controller {
                     if(err){ return next(err) }
                     return res.json({token: user.generateJWT()})
                 })
+            }
+        })
+    }
+
+    update(req, res, next) {
+        // Update a document by request param, this param need to be id with data from body request (req.body)
+        this.model.findOneAndUpdate({
+            _id: req.params.id
+        }, req.body, {new: true}, (err, user) => {
+            if (err) {
+                next(err)
+            } else {
+              console.log(user)
+              return res.json({token: user.generateJWT()})
             }
         })
     }

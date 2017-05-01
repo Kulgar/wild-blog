@@ -71,7 +71,7 @@ let blogItem = {
         // Create undo function.
         // If you want to use in view you can call with $ctrl.undo()
         this.undo = () => {
-            if (!this.post.isNew) {
+            if (this.post && !this.post.isNew) {
                 // Affect initialPost value to post and change editMode to false
                 this.post = initialPost
                 this.editMode = false
@@ -82,25 +82,30 @@ let blogItem = {
 
         this.isFav = () => {
             if (!this.post) return
-            return (this.user.bookmarks.find((post) => post._id === this.post._id))
+            return (this.user.bookmarks.find((post_id) => post_id.id === this.post._id))
         }
 
         this.addOrRemoveToBookmark = () => {
             // Try to find post in bookmarks
-            let postFound = this.user.bookmarks.find((post) => post._id === this.post._id)
+            let postFound = this.user.bookmarks.find((post) => post.id === this.post._id)
 
             if (!postFound) {
                 //Not found
-                this.user.bookmarks.push(this.post)
+                this.user.bookmarks.push(this.post._id)
             } else {
                 //Found
-                this.user.bookmarks = this.user.bookmarks.filter((post) => {
-                    return post._id !== this.post._id
+                this.user.bookmark = this.user.bookmarks.filtered((post_id) => {
+                    return post_id !== this.post._id
                 })
             }
 
-            UsersService.update(this.user).then(() => {
+            UsersService.update(this.user).then((res) => {
+                //return UsersService.setToken(res.data.token)
+            }).then((user) => {
                 Materialize.toast((postFound ? 'Removed' : 'Added'), 2000, (postFound ? 'toast-warning' : 'toast-success'))
+            }).catch((err) => {
+                let toastContent = `Error : ${err.data} !`
+                Materialize.toast(toastContent, 4000, 'toast-error')
             })
         }
 
