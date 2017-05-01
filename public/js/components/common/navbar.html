@@ -8,7 +8,11 @@
 </ul>
 <nav class="blue darken-1">
     <div class="nav-wrapper container">
-        <a href="#" class="brand-logo"><i class="material-icons">book</i></a>
+        <a href="#" class="brand-logo">
+          <i class="material-icons">book</i>
+          <small>{{$ctrl.date}}</small>
+        </a>
+
         <ul class="right hide-on-med-and-down">
             <li><a href='javascript:void(0);' data-activates='demoDropdown' dropdown>{{($ctrl.user ? $ctrl.user.name : '')}}<i class="material-icons right">{{($ctrl.user ? 'arrow_drop_down' : 'reorder')}}</i></a></li>
         </ul>
