@@ -12,6 +12,7 @@ let blogItem = {
     controller: ['UsersService', 'PostsService', '$stateParams', '$state', function(UsersService, PostsService, $stateParams, $state) {
         'use  strict'
         let initialPost;
+        this.editMode = false;
 
         // Call getCurrent() method from UsersService.
         // When this request receive response we affect response data to this controller variable user
@@ -30,6 +31,7 @@ let blogItem = {
                 this.post.isNew = true;
                 // Affect editMode property to true
                 this.editMode = true
+
             } else {
                 // If $stateParams.id is an id we make HTTP request with this id to get data
                 PostsService.getById($stateParams.id).then((res) => {
