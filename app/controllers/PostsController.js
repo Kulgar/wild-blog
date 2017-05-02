@@ -15,6 +15,26 @@ class PostsController extends Controller {
         super(Post)
     }
 
+    find(req, res, next) {
+        this.model.find({published: true}, (err, documents) => {
+            res.json(documents)
+        })
+    }
+
+    findById(req, res, next) {
+        // Get a unique document by request param, this param need to be id
+        this.model.findById(req.params.id, (err, document) => {
+            if (err)
+                next(err)
+            else
+              if(document.published){
+                res.json(document)
+              } else {
+                return res.status("401").send("Article not published yet")
+              }
+        })
+    }
+
 }
 
 module.exports = PostsController

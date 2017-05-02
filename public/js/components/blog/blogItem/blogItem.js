@@ -39,6 +39,10 @@ let blogItem = {
                     this.post = res.data;
                     // save into initialPost a copy of this post (used for undo)
                     initialPost = angular.copy(this.post)
+                }).catch((err) => {
+                    let toastContent = `Error : ${err.data} !`
+                    $state.go("blog.list")
+                    Materialize.toast(toastContent, 4000, 'toast-error')
                 })
             }
         } else {

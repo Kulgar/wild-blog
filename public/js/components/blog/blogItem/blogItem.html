@@ -21,6 +21,15 @@
             <textarea class="materialize-textarea" ng-if="($ctrl.editable && $ctrl.editMode)" ng-model="$ctrl.post.content" placeholder="Content"></textarea>
 
             <input type="date" class="datepicker" ng-if="($ctrl.editable && $ctrl.editMode)" ng-model="$ctrl.post.publishedAt" placeholder="Date as YYYY-MM-DD">
+
+            <div class="switch" ng-if="($ctrl.editable && $ctrl.editMode)">
+                <label>
+                    Off
+                    <input type="checkbox" ng-model="$ctrl.post.published">
+                    <span class="lever"></span>
+                    On
+                </label>
+            </div>
         </div>
 
         <div class="card-action">
